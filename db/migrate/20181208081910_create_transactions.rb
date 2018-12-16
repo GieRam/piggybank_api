@@ -5,6 +5,7 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
       t.integer :type
       t.boolean :periodic
       t.datetime :active_from
+      t.string :description
       t.belongs_to :account, index: true
 
       t.timestamps

@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_12_08_095952) do
     t.integer "type"
     t.boolean "periodic"
     t.datetime "active_from"
+    t.string "description"
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

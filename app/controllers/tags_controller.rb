@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  before_action :set_tag, only: [:show, :destroy]
+  before_action :set_tag, only: :show
 
   def index
     @tags = Tag.all
@@ -19,10 +19,6 @@ class TagsController < ApplicationController
     else
       render json: @tag.errors, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @tag.destroy
   end
 
   private
