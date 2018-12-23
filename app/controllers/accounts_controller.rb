@@ -29,10 +29,6 @@ class AccountsController < ApplicationController
     end
   end
 
-  def destroy
-    @account.destroy
-  end
-
   private
 
   def set_account

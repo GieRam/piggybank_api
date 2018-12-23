@@ -27,10 +27,6 @@ class GoalsController < ApplicationController
     end
   end
 
-  def destroy
-    @goal.destroy
-  end
-
   private
 
   def set_goal
