@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_LOG_TO_STDOUT: 'true'
+      RAILS_ENV: production
+      PIGGYBANK_API_DATABASE_PASSWORD: example
+      PIGGYBANK_API_DATABASE_HOST: mysql
+    links:
+      - "mysql"
+
+  mysql:
+    image: mysql:5.7.24
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "4306:3306"
+      - "43060:33060"
+    environment:
+      MYSQL_ROOT_PASSWORD: a
+      MYSQL_USER: piggybank_api
+      MYSQL_PASSWORD: example
+      MYSQL_DATABASE: piggybank_api_production

@@ -52,3 +52,4 @@ production:
   database: piggybank_api_production
   username: piggybank_api
   password: <%= ENV['PIGGYBANK_API_DATABASE_PASSWORD'] %>
+  host: <%= ENV['PIGGYBANK_API_DATABASE_HOST'] %>
