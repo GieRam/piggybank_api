@@ -9,6 +9,7 @@ services:
       RAILS_ENV: production
       PIGGYBANK_API_DATABASE_PASSWORD: example
       PIGGYBANK_API_DATABASE_HOST: mysql
+      SECRET_KEY_BASE: local-key-base
     links:
       - "mysql"
 
