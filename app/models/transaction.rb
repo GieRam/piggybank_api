@@ -7,7 +7,7 @@ class Transaction < ApplicationRecord
 
   validates :amount, presence: true
   validates :source, presence: true
-  validates :description, length: { minimum: 2, maximum: 255 }
+  validates :description, length: { maximum: 255 }
   validate :active_from_cant_be_in_past
 
   def active_from_cant_be_in_past

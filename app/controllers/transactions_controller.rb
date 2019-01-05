@@ -15,6 +15,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
 
     if @transaction.save
+      @transaction.tag_ids = params[:tag_ids]
       render json: @transaction, status: :created, location: @transaction
     else
       render json: @transaction.errors, status: :unprocessable_entity
@@ -28,6 +29,12 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:amount, :type, :periodic)
+    params.require(:transaction).permit(
+      :amount,
+      :active_from,
+      :source,
+      :description,
+      :account_id
+    )
   end
 end
