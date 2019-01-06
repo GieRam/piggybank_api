@@ -1,12 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[show update]
 
-  def index
-    @transactions = Transaction.all
-
-    render json: @transactions
-  end
-
   def show
     render json: @transaction
   end
