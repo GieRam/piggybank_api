@@ -8,6 +8,7 @@ describe 'Accounts API' do
     post 'Creates an account' do
       tags 'Accounts'
       consumes 'application/json'
+      produces 'application/json'
       parameter name: :account, in: :body, schema: {
         type: :object,
         properties: {

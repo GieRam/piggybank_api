@@ -14,6 +14,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "account",
@@ -47,6 +50,82 @@
         }
       }
     },
+    "/tags": {
+      "get": {
+        "summary": "Lists tags",
+        "tags": [
+          "Tags"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "tags found",
+            "schema": {
+              "type": "array",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "name",
+                "created_at",
+                "updated_at"
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Creates a tag",
+        "tags": [
+          "Tags"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tag",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "tag created"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
     "/transactions": {
       "post": {
         "summary": "Creates a transaction",
@@ -54,6 +133,9 @@
           "Transactions"
         ],
         "consumes": [
+          "application/json"
+        ],
+        "produces": [
           "application/json"
         ],
         "parameters": [

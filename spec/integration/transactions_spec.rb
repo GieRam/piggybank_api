@@ -8,6 +8,7 @@ describe 'Transactions API' do
     post 'Creates a transaction' do
       tags 'Transactions'
       consumes 'application/json'
+      produces 'application/json'
       parameter name: :transaction, in: :body, schema: {
         type: :object,
         properties: {
