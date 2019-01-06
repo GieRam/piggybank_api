@@ -11,11 +11,12 @@ describe 'Transactions API' do
       parameter name: :transaction, in: :body, schema: {
         type: :object,
         properties: {
-          amount: { type: :float },
+          amount: { type: :number },
           source: { type: :integer },
-          active_from: { type: :date },
+          active_from: { type: :string },
           account_id: { type: :integer },
-          tag_ids: { type: :array }
+          tag_ids: { type: :array, items: { type: :integer } },
+          description: { type: :string }
         },
         required: %w[amount source active_from account_id]
       }
@@ -54,9 +55,9 @@ describe 'Transactions API' do
         schema type: :object,
                properties: {
                  id: { type: :integer },
-                 amount: { type: :float },
+                 amount: { type: :number },
                  source: { type: :string },
-                 active_from: { type: :date },
+                 active_from: { type: :string },
                  description: { type: :string }
                },
                required: %w[id amount source active_from]

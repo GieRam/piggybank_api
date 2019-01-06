@@ -15,6 +15,7 @@ class AccountsController < ApplicationController
     @account = Account.new(account_params)
 
     if @account.save
+      @account.tag_ids = params[:tag_ids]
       render json: @account, status: :created, location: @account
     else
       render json: @account.errors, status: :unprocessable_entity

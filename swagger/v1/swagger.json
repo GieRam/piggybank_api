@@ -5,6 +5,48 @@
     "version": "v1"
   },
   "paths": {
+    "/accounts": {
+      "post": {
+        "summary": "Creates an account",
+        "tags": [
+          "Accounts"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "account",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "tag_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "required": [
+                "name"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "account created"
+          },
+          "422": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
     "/transactions": {
       "post": {
         "summary": "Creates a transaction",
@@ -22,19 +64,25 @@
               "type": "object",
               "properties": {
                 "amount": {
-                  "type": "float"
+                  "type": "number"
                 },
                 "source": {
                   "type": "integer"
                 },
                 "active_from": {
-                  "type": "date"
+                  "type": "string"
                 },
                 "account_id": {
                   "type": "integer"
                 },
                 "tag_ids": {
-                  "type": "array"
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                },
+                "description": {
+                  "type": "string"
                 }
               },
               "required": [
@@ -83,13 +131,13 @@
                   "type": "integer"
                 },
                 "amount": {
-                  "type": "float"
+                  "type": "number"
                 },
                 "source": {
                   "type": "string"
                 },
                 "active_from": {
-                  "type": "date"
+                  "type": "string"
                 },
                 "description": {
                   "type": "string"
