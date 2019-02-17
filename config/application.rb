@@ -21,7 +21,7 @@ module PiggybankApi
   class Application < Rails::Application
     config.load_defaults 5.2
     config.api_only = true
-    config.autoload_paths += %W[
+    config.eager_load_paths += %W[
       #{Rails.root.join('lib')}
     ]
   end
