@@ -14,7 +14,8 @@ gem 'active_model_serializers', '~> 0.10.9'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors'
-gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
 gem 'jwt'
 
 group :development, :test do
@@ -26,6 +27,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'rspec-rails', '~> 3.8'
+  gem 'rswag-specs'
 end
 
 group :development do
