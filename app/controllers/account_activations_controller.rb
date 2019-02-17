@@ -5,7 +5,7 @@ class AccountActivationsController < ApplicationController
 
   def edit
     user = User.find_by(email: params[:email])
-    if user && !user.activated? && user.authenticated?(:activation, params[:id])
+    if user && !user.activated? && user.authenticated?(:activation, params[:token])
       user.activate
       render json: { token: user.auth_token }
     else
