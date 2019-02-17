@@ -7,5 +7,7 @@
 </p>
 
 <!-- TODO: form url from env variable -->
-<%= link_to 'Activate', edit_account_activation_url(@user.activation_token,
-                                                    email: @user.email) %>
+<ul>
+  <li>Activation token: <%= @user.activation_token %></li>
+  <li>Email: <%= @user.email %></li>
+</ul>
