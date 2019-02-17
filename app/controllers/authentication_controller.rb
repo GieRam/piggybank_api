@@ -6,7 +6,7 @@ class AuthenticationController < ApplicationController
   def create
     user = User.find_by(email: params[:email].downcase)
     if user&.authenticate(params[:password])
-      JsonWebToken.encode(user_id: user.id)
+      render json: { token: user.auth_token }
     else
       render json: { error_message: 'Invalid credentials' }, status: :unauthorized
     end
