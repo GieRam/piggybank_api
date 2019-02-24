@@ -7,7 +7,7 @@ class UsersController < ApplicationController
       user.send_activation_email
       render json: user
     else
-      render json: { error_message: 'Bad request' }, status: :bad_request
+      render_validation_errors(user)
     end
   end
 
