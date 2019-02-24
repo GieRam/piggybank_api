@@ -3,6 +3,12 @@
 class User < ApplicationRecord
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
 
+  # Must contain 6 or more characters
+  # Must contain a digit
+  # Must contain a lower case character
+  # Must contain an upper case character
+  VALID_PASSWORD = /\A(?=.{6,})(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/x.freeze
+
   attr_accessor :activation_token, :reset_token
 
   before_save :downcase_email
@@ -15,6 +21,9 @@ class User < ApplicationRecord
                     presence: true,
                     length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX }
+  validates :password, presence: true,
+                       length: { minimum: 6, maximum: 50 },
+                       format: { with: VALID_PASSWORD }
 
   def self.new_token
     SecureRandom.urlsafe_base64
@@ -37,12 +46,12 @@ class User < ApplicationRecord
   end
 
   def activate
-    update(activated: true, activated_at: Time.zone.now)
+    update_columns(activated: true, activated_at: Time.zone.now)
   end
 
   def create_reset_digest
     self.reset_token = User.new_token
-    update(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
+    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
   def send_password_reset_email

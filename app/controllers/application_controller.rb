@@ -26,6 +26,10 @@ class ApplicationController < ActionController::API
     render json: { error_message: 'Invalid token' }, status: :unauthorized unless @current_user
   end
 
+  def render_unauthorized
+    render json: { error_message: 'Unauthorized' }, status: :unauthorized
+  end
+
   def render_validation_errors(record)
     hash = { error_message: 'Validation error' }
     hash[:errors] = record.errors.map do |field, message|
