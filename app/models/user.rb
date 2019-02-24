@@ -10,6 +10,12 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  validates :username, uniqueness: true, presence: true, length: { minimum: 2, maximum: 50 }
+  validates :email, uniqueness: true,
+                    presence: true,
+                    length: { maximum: 255 },
+                    format: { with: VALID_EMAIL_REGEX }
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end
