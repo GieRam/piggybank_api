@@ -20,9 +20,10 @@ class ApplicationController < ActionController::API
       @current_user = User.find(decoded_auth_token[:user_id])
     else
       render json: { error_message: 'Missing token' }, status: :unauthorized
+      return
     end
 
-    render json: { error_message: 'Unauthorized' }, status: :unauthorized unless @current_user
+    render json: { error_message: 'Invalid token' }, status: :unauthorized unless @current_user
   end
 
   private
