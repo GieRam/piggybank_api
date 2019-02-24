@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
   before_action :authenticate_request
 
@@ -14,7 +16,12 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_request
-    @current_user = User.find(decoded_auth_token[:user_id])
+    if decoded_auth_token
+      @current_user = User.find(decoded_auth_token[:user_id])
+    else
+      render json: { error_message: 'Missing token' }, status: :unauthorized
+    end
+
     render json: { error_message: 'Unauthorized' }, status: :unauthorized unless @current_user
   end
 
@@ -24,6 +31,6 @@ class ApplicationController < ActionController::API
     authorization = request.headers['Authorization']
     return if authorization.blank?
 
-    JsonWebToken.decode(authorization.split(' ').last)
+    @decoded_auth_token ||= JsonWebToken.decode(authorization.split(' ').last)
   end
 end

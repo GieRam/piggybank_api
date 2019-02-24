@@ -1,5 +1,5 @@
-# TODO: better error handling.
-# https://www.pluralsight.com/guides/token-based-authentication-with-ruby-on-rails-5-api
+# frozen_string_literal: true
+
 class AuthenticationController < ApplicationController
   skip_before_action :authenticate_request
 
