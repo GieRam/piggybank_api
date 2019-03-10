@@ -11,6 +11,6 @@ Rails.application.routes.draw do
       get 'activation', to: 'account_activations#edit'
     end
   end
-  resources :password_resets, only: %i[create edit update]
+  resources :password_resets, only: %i[create update]
   resources :transactions, only: %i[index]
 end
