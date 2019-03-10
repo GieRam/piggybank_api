@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[create] do
     collection do
       post 'authentication', to: 'authentication#create'
+      delete 'authentication', to: 'authentication#destroy'
       get 'activation', to: 'account_activations#edit'
     end
   end

@@ -66,6 +66,13 @@ class User < ApplicationRecord
     JsonWebToken.encode(user_id: id)
   end
 
+  def set_refresh_token
+    token = SecureRandom.uuid
+    update_column(:refresh_token, token)
+
+    token
+  end
+
   private
 
   def downcase_email

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::API
+  include AuthHelper
+
   before_action :authenticate_request
 
   attr_reader :current_user
@@ -15,21 +17,6 @@ class ApplicationController < ActionController::API
     render json: { error_message: 'Not found' }, status: :not_found
   end
 
-  def authenticate_request
-    if decoded_auth_token
-      @current_user = User.find(decoded_auth_token[:user_id])
-    else
-      render json: { error_message: 'Missing token' }, status: :unauthorized
-      return
-    end
-
-    render json: { error_message: 'Invalid token' }, status: :unauthorized unless @current_user
-  end
-
-  def render_unauthorized
-    render json: { error_message: 'Unauthorized' }, status: :unauthorized
-  end
-
   def render_validation_errors(record)
     hash = { error_message: 'Validation error' }
     hash[:errors] = record.errors.map do |field, message|
@@ -39,14 +26,5 @@ class ApplicationController < ActionController::API
       }
     end
     render json: hash, status: :bad_request
-  end
-
-  private
-
-  def decoded_auth_token
-    authorization = request.headers['Authorization']
-    return if authorization.blank?
-
-    @decoded_auth_token ||= JsonWebToken.decode(authorization.split(' ').last)
   end
 end

@@ -7,7 +7,7 @@ class AccountActivationsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && !user.activated? && user.authenticated?(:activation, params[:token])
       user.activate
-      render json: { token: user.auth_token }
+      render json: login(user)
     else
       render json: { error_message: 'Invalid activation' }, status: :unauthorized
     end

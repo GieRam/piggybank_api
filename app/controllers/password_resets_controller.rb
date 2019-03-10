@@ -19,7 +19,7 @@ class PasswordResetsController < ApplicationController
   def update
     if @user.update(user_params)
       @user.update_attribute(:reset_digest, nil)
-      render json: { token: @user.auth_token }
+      render json: login(@user)
     else
       render_validation_errors(@user)
     end
