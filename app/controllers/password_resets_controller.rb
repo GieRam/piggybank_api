@@ -37,11 +37,11 @@ class PasswordResetsController < ApplicationController
   end
 
   def valid_user
-    render_unauthorized unless @user&.activated? &&
-                               @user&.authenticated?(:reset, params[:id])
+    render_unauthorized 'Invalid user' unless @user&.activated? &&
+                                              @user&.authenticated?(:reset, params[:id])
   end
 
   def check_expiration
-    render_unauthorized if @user.password_reset_expired?
+    render_unauthorized 'Reset token expired' if @user.password_reset_expired?
   end
 end
