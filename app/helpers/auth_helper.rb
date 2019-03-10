@@ -3,7 +3,7 @@
 module AuthHelper
   def login(user)
     {
-      token: user.auth_token,
+      access_token: user.auth_token,
       refresh_token: user.set_refresh_token,
     }
   end
