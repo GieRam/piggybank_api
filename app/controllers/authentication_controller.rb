@@ -4,14 +4,14 @@ class AuthenticationController < ApplicationController
   skip_before_action :authenticate_request, only: %i[create]
 
   def create
-    user = User.find_by(email: params[:email].downcase)
-
     if params[:client_id] != 'piggybank-app'
       render_unauthorized 'Invalid client'
       return
     end
 
     if params[:grant_type] == 'password'
+      user = User.find_by(email: params[:email].downcase)
+
       if user&.authenticate(params[:password])
         render json: login(user)
       else
@@ -19,6 +19,7 @@ class AuthenticationController < ApplicationController
       end
     elsif params[:grant_type] == 'refresh_token'
       user = User.find_by(refresh_token: params[:refresh_token])
+
       if user.present?
         render json: login(user)
       else
