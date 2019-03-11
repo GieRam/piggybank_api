@@ -4,10 +4,7 @@ class AuthenticationController < ApplicationController
   skip_before_action :authenticate_request, only: %i[create]
 
   def create
-    if params[:client_id] != 'piggybank-app'
-      render_unauthorized 'Invalid client'
-      return
-    end
+    return render_unauthorized 'Invalid client' if params[:client_id] != 'piggybank-app'
 
     if params[:grant_type] == 'password'
       user = User.find_by(email: params[:email].downcase)

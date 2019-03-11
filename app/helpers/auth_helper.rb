@@ -12,8 +12,7 @@ module AuthHelper
     if decoded_auth_token
       @current_user = User.find(decoded_auth_token[:user_id])
     else
-      render json: { error_message: 'Missing token' }, status: :unauthorized
-      return
+      return render json: { error_message: 'Missing token' }, status: :unauthorized
     end
 
     render json: { error_message: 'Invalid token' }, status: :unauthorized unless @current_user

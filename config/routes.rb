@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post 'authentication', to: 'authentication#create'
       delete 'authentication', to: 'authentication#destroy'
       get 'activation', to: 'account_activations#edit'
+      post 'field/validation', to: 'users#validate_field'
     end
   end
   resources :password_resets, only: %i[create edit update]

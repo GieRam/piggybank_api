@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    email { "MyString" }
-    password_digest { "MyString" }
-    remember_digest { "MyString" }
-    reset_digest { "MyString" }
+    username { 'Test' }
+    email { 'test@mail.com' }
+    password { 'Test123!' }
+    password_confirmation { 'Test123!' }
+
+    trait :with_password_reset do
+      after(:create, &:create_reset_digest)
+    end
   end
 end
