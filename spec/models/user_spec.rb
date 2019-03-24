@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
   end
 
   describe '#authenticated?' do
-    let(:user) { build(:user, :with_password_reset) }
+    let(:user) { create(:user, :with_password_reset) }
     subject { user.authenticated?(:reset, user.reset_token) }
 
     it { is_expected.to be_truthy }
@@ -98,7 +98,7 @@ RSpec.describe User, type: :model do
     subject { user.set_refresh_token }
 
     it 'sets refresh token' do
-      expect(subject.size).to eq(60)
+      expect(subject.size).to eq(36)
       expect(user.refresh_token).to eq(subject)
     end
   end

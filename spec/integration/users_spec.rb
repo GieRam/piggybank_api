@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'swagger_helper'
+require_relative './swagger_schemas'
 
 RSpec.describe 'Users API' do
   path '/users' do
@@ -19,10 +20,7 @@ RSpec.describe 'Users API' do
       }
 
       response '200', 'created' do
-        schema type: :object, properties: {
-          username: { type: :string },
-          email: { type: :string },
-        }
+        schema SwaggerSchemas.user
 
         let(:user) do
           {
@@ -39,25 +37,9 @@ RSpec.describe 'Users API' do
       end
 
       response '400', 'validation errors' do
-        schema type: :object, properties: {
-          error_message: { type: :string },
-          errors: {
-            type: :array,
-            items: {
-              type: :object,
-              properties: {
-                field: { type: :string },
-                value: { type: :string },
-              },
-            },
-          },
-        }
+        schema SwaggerSchemas.validation_errors
 
-        let(:user) do
-          {
-            username: 'Test'
-          }
-        end
+        let(:user) { { username: 'Test' } }
 
         run_test! do |response|
           expect(JSON.parse(response.body)).to include(
