@@ -27,6 +27,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-remote'
   gem 'rspec-rails', '~> 3.8'
+  gem 'rspec-its'
+  gem 'timecop'
   gem 'rswag-specs'
 end
 

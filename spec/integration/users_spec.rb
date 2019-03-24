@@ -6,6 +6,65 @@ RSpec.describe 'Users API' do
   path '/users' do
     post 'Create user' do
       tags 'Users'
+      produces 'application/json'
+      consumes 'application/json'
+      parameter name: :user, in: :body, schema: {
+        type: :object,
+        properties: {
+          username: { type: :string },
+          email: { type: :string },
+          password: { type: :string },
+          password_confirmation: { type: :string },
+        },
+      }
+
+      response '200', 'created' do
+        schema type: :object, properties: {
+          username: { type: :string },
+          email: { type: :string },
+        }
+
+        let(:user) do
+          {
+            username: 'Test',
+            email: 'test@mail.com',
+            password: 'Test123!',
+            password_confirmation: 'Test123!',
+          }
+        end
+
+        run_test! do |response|
+          expect(JSON.parse(response.body)).to include('username', 'email')
+        end
+      end
+
+      response '400', 'validation errors' do
+        schema type: :object, properties: {
+          error_message: { type: :string },
+          errors: {
+            type: :array,
+            items: {
+              type: :object,
+              properties: {
+                field: { type: :string },
+                value: { type: :string },
+              },
+            },
+          },
+        }
+
+        let(:user) do
+          {
+            username: 'Test'
+          }
+        end
+
+        run_test! do |response|
+          expect(JSON.parse(response.body)).to include(
+            'error_message' => 'Validation error'
+          )
+        end
+      end
     end
   end
 
