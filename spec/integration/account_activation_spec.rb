@@ -6,6 +6,7 @@ require_relative './swagger_schemas'
 describe 'Account activation API' do
   path '/users/activation' do
     get 'Activate user' do
+      tags 'Account activation'
       produces 'application/json'
       parameter name: :email, in: :query, type: :string
       parameter name: :token, in: :query, type: :string

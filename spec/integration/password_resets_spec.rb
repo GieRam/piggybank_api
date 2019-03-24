@@ -5,7 +5,7 @@ require 'swagger_helper'
 describe 'Password resets API' do
   path '/password_resets' do
     post 'Create password reset' do
-      tags 'Password Reset'
+      tags 'Password reset'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :email, in: :body, schema: {
@@ -45,7 +45,7 @@ describe 'Password resets API' do
 
   path '/password_resets/{id}' do
     patch 'Update password' do
-      tags 'Password Reset'
+      tags 'Password reset'
       produces 'application/json'
       consumes 'application/json'
       parameter name: :user_password, in: :body, schema: {
