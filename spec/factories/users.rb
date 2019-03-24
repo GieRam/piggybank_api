@@ -10,5 +10,9 @@ FactoryBot.define do
     trait :with_password_reset do
       after(:create, &:create_reset_digest)
     end
+
+    trait :active do
+      after(:create, &:activate)
+    end
   end
 end
