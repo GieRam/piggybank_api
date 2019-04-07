@@ -15,17 +15,16 @@ class AccountsController < ApplicationController
     account = Account.create(account_params)
 
     if account.valid?
-      render json: account
+      account.user_accounts.create(user: current_user)
+      render json: account, status: :created
     else
       render_validation_errors(account)
     end
   end
 
   def update
-    account.update(account_params)
-
-    if account.valid?
-      render json: account
+    if account.update(account_params)
+      render json: account, status: :accepted
     else
       render_validation_errors(account)
     end

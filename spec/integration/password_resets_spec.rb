@@ -3,6 +3,9 @@
 require 'swagger_helper'
 
 describe 'Password resets API' do
+  let(:user) { create(:user) }
+  let(:Authorization) { "Bearer #{user.auth_token}" }
+
   path '/password_resets' do
     post 'Create password reset' do
       tags 'Password reset'
@@ -12,7 +15,7 @@ describe 'Password resets API' do
         type: :object,
         properties: {
           email: { type: :string },
-        }
+        },
       }
 
       response '200', 'created' do

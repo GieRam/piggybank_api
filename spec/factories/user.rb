@@ -11,6 +11,10 @@ FactoryBot.define do
       after(:create, &:create_reset_digest)
     end
 
+    trait :with_refresh_token do
+      after(:create, &:set_refresh_token)
+    end
+
     trait :active do
       after(:create, &:activate)
     end

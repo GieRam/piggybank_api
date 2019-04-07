@@ -3,10 +3,13 @@
 require 'swagger_helper'
 require_relative './swagger_schemas'
 
-describe 'Account activation API' do
+describe 'User activation API' do
+  let(:user) { create(:user) }
+  let(:Authorization) { "Bearer #{user.auth_token}" }
+
   path '/users/activation' do
     get 'Activate user' do
-      tags 'Account activation'
+      tags 'User activation'
       produces 'application/json'
       parameter name: :email, in: :query, type: :string
       parameter name: :token, in: :query, type: :string

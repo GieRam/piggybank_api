@@ -28,6 +28,8 @@ class AuthenticationController < ApplicationController
   end
 
   def destroy
-    @current_user.update_column(:refresh_token, nil)
+    @current_user.update_attribute(:refresh_token, nil)
+
+    head :no_content
   end
 end

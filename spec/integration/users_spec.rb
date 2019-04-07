@@ -4,6 +4,8 @@ require 'swagger_helper'
 require_relative './swagger_schemas'
 
 RSpec.describe 'Users API' do
+  let(:Authorization) { 'Bearer token' }
+
   path '/users' do
     post 'Create user' do
       tags 'Users'
