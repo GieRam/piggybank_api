@@ -28,4 +28,16 @@ class ApplicationController < ActionController::API
     end
     render json: hash, status: :bad_request
   end
+
+  def validate_unique_field(unique_fields, model)
+    render json: { error_message: 'Unsupported field' }, status: :bad_request if
+      (params.keys & unique_fields).empty?
+
+    unique_fields.each do |field|
+      if params[field] && model.public_send(:exists?, ["#{field} = ?", params[field]])
+        return render json: { error_message: "#{field.to_s.capitalize} is taken" },
+                      status: :bad_request
+      end
+    end
+  end
 end

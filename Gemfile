@@ -13,10 +13,10 @@ gem 'puma', '~> 3.11'
 gem 'active_model_serializers', '~> 0.10.9'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'jwt'
 gem 'rack-cors'
 gem 'rswag-api'
 gem 'rswag-ui'
-gem 'jwt'
 
 group :development, :test do
   gem 'factory_bot_rails'
@@ -26,10 +26,11 @@ group :development, :test do
   gem 'pronto-rubocop', require: false
   gem 'pry'
   gem 'pry-remote'
-  gem 'rspec-rails', '~> 3.8'
   gem 'rspec-its'
-  gem 'timecop'
+  gem 'rspec-rails', '~> 3.8'
   gem 'rswag-specs'
+  gem 'shoulda-matchers'
+  gem 'timecop'
 end
 
 group :development do

@@ -2,6 +2,18 @@
 
 RSpec.describe User, type: :model do
   let(:now) { Time.zone.now }
+  subject { create(:user) }
+
+  it { should validate_uniqueness_of :username }
+  it { should validate_presence_of :username }
+  it { should validate_length_of(:username).is_at_least(2).is_at_most(50) }
+  it { should validate_uniqueness_of :email }
+  it { should validate_presence_of :email }
+  it { should allow_value('email@test.com').for(:email) }
+  it { should validate_length_of(:email).is_at_most(255) }
+  it { should have_secure_password }
+  it { should validate_length_of(:password).is_at_least(6).is_at_most(50) }
+  it { should allow_value('PassWord12!').for(:password) }
 
   describe '.new_token' do
     subject { described_class.new_token }

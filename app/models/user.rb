@@ -25,6 +25,9 @@ class User < ApplicationRecord
                        length: { minimum: 6, maximum: 50 },
                        format: { with: VALID_PASSWORD }
 
+  has_many :user_accounts, dependent: :destroy
+  has_many :accounts, through: :user_accounts
+
   def self.new_token
     SecureRandom.urlsafe_base64
   end

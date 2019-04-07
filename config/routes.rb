@@ -14,4 +14,9 @@ Rails.application.routes.draw do
   end
   resources :password_resets, only: %i[create edit update]
   resources :transactions, only: %i[index]
+  resources :accounts do
+    collection do
+      post 'field/validation', to: 'accounts#validate_field'
+    end
+  end
 end

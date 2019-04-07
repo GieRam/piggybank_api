@@ -55,11 +55,55 @@
         }
       }
     },
+    "/accounts/field/validation": {
+      "post": {
+        "summary": "Validate field",
+        "tags": [
+          "Accounts"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "validation",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "valid field"
+          },
+          "400": {
+            "description": "invalid field",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error_message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/password_resets": {
       "post": {
         "summary": "Create password reset",
         "tags": [
-          "Password Reset"
+          "Password reset"
         ],
         "produces": [
           "application/json"
@@ -95,7 +139,7 @@
       "patch": {
         "summary": "Update password",
         "tags": [
-          "Password Reset"
+          "Password reset"
         ],
         "produces": [
           "application/json"
@@ -269,5 +313,20 @@
         }
       }
     }
-  }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "User auth token. Bearer :token:"
+    }
+  },
+  "security": [
+    {
+      "apiKey": [
+
+      ]
+    }
+  ]
 }
